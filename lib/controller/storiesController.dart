@@ -1,5 +1,6 @@
 import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
+import 'package:remote_kitchen_news_app/models/comment_model.dart';
 import 'dart:convert';
 import '../models/news_model.dart';
 
@@ -7,6 +8,8 @@ class ItemController extends GetxController {
   var items = <ItemModel>[].obs;
   var isLoading = true.obs;
   var isLoadingMore = false.obs;
+  var comments = <CommentModel>[].obs;
+  var isLoadingComments = false.obs;
   var currentPage = 0;
   final int pageSize = 10; // Number of news to load per page
 
@@ -49,4 +52,23 @@ class ItemController extends GetxController {
       }
     }
   }
+
+// Fetch Comments list with ids
+
+ void fetchComments(List<int> commentIds) async {
+    isLoadingComments(true);
+    comments.clear();
+    try {
+      for (var id in commentIds) {
+        final commentResponse = await http.get(Uri.parse('https://hacker-news.firebaseio.com/v0/item/$id.json'));
+        if (commentResponse.statusCode == 200) {
+          comments.add(CommentModel.fromJson(json.decode(commentResponse.body)));
+        }
+      }
+    } finally {
+      isLoadingComments(false);
+    }
+  }
+
+
 }

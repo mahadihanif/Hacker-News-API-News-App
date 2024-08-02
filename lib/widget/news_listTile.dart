@@ -14,17 +14,17 @@ class NewsListTile extends StatelessWidget {
   });
   @override
   Widget build(BuildContext context) {
-    return Row(
-      children: [
-        Column(
-          children: [
-            Text(
-              "$upVotes votes",
-              style: const TextStyle(fontSize: 9.0, color: Colors.grey),
-            )
-          ],
-        )
-      ],
+    return Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: ListTile(
+        onTap: () => onTap() ,
+        title: Text(title, style: const TextStyle(fontWeight: FontWeight.bold),),
+        subtitle: Text("$upVotes votes"),
+        trailing: Column(children: [
+          const Icon(Icons.comment),
+          Text("$noOfComments"),
+        ]),
+      ),
     );
   }
 }

@@ -2,29 +2,32 @@ class ItemModel {
   final String title;
   final String? author;
   final String? url;
+  final List<int> kids;
   final int? score;
   final int? descendants;
-  // final int time;
+  final int time;
  
 
   ItemModel({
     required this.title,
-    required this.author,
     required this.score,
     required this.descendants,
+    this.author,
     this.url,
-    // required this.time,
+    required this.time,
+    required this.kids,
     
   });
 
   factory ItemModel.fromJson(Map<String, dynamic> json) {
     return ItemModel(
       title: json['title'],
-      author: json['author'],
+      author: json['by'],
       url: json['url'],
       score: json['score'],
       descendants: json['descendants'],
-      // time: json['time'],
+      time: json['time'],
+      kids: List<int>.from(json['kids'] ?? []),
       
     );
   }
