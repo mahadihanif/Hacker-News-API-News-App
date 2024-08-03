@@ -34,7 +34,7 @@ flutter run lib/main.dart
 
 A quick demo of the running app
 
-
+![hackerNewsApp](https://github.com/user-attachments/assets/737fb694-ccb5-4dc6-be6c-de49438d4398)
 
 First Page showing list of news
 ![news list](https://github.com/user-attachments/assets/a1d88397-6c99-4b8f-b039-f84179370736)
