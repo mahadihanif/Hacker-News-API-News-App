@@ -3,6 +3,7 @@ import 'package:http/http.dart' as http;
 import 'package:remote_kitchen_news_app/models/comment_model.dart';
 import 'dart:convert';
 import '../models/news_model.dart';
+import '../resources/urlHelper.dart';
 
 class ItemController extends GetxController {
   var items = <ItemModel>[].obs;
@@ -12,6 +13,9 @@ class ItemController extends GetxController {
   var isLoadingComments = false.obs;
   var currentPage = 0;
   final int pageSize = 10; // Number of news to load per page
+  final _topStoryUrl = Uri.parse(UrlHelper.urlForTopStories());
+  
+  
 
   @override
   void onInit() {
@@ -27,8 +31,8 @@ class ItemController extends GetxController {
     }
 
     try {
-      final response = await http.get(
-          Uri.parse('https://hacker-news.firebaseio.com/v0/topstories.json'));
+      final response =
+          await http.get(_topStoryUrl);  // Getting top Stories ID list
       if (response.statusCode == 200) {
         List<dynamic> ids = json.decode(response.body);
         int start = currentPage * pageSize;
@@ -36,8 +40,8 @@ class ItemController extends GetxController {
         List<dynamic> pageIds = ids.sublist(start, end);
 
         for (var id in pageIds) {
-          final itemResponse = await http.get(
-              Uri.parse('https://hacker-news.firebaseio.com/v0/item/$id.json'));
+          final storyUrl = Uri.parse(UrlHelper.urlForStory(id));
+          final itemResponse = await http.get(storyUrl);    // Getting Story by ID
           if (itemResponse.statusCode == 200) {
             items.add(ItemModel.fromJson(json.decode(itemResponse.body)));
           }
@@ -55,20 +59,21 @@ class ItemController extends GetxController {
 
 // Fetch Comments list with ids
 
- void fetchComments(List<int> commentIds) async {
+  void fetchComments(List<int> commentIds) async {
     isLoadingComments(true);
     comments.clear();
     try {
       for (var id in commentIds) {
-        final commentResponse = await http.get(Uri.parse('https://hacker-news.firebaseio.com/v0/item/$id.json'));
+      final CommentsUrl = Uri.parse(UrlHelper.urlForCommentById(id));
+        final commentResponse = await http.get(
+           CommentsUrl);
         if (commentResponse.statusCode == 200) {
-          comments.add(CommentModel.fromJson(json.decode(commentResponse.body)));
+          comments
+              .add(CommentModel.fromJson(json.decode(commentResponse.body)));
         }
       }
     } finally {
       isLoadingComments(false);
     }
   }
-
-
 }

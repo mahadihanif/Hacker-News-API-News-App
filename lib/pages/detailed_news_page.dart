@@ -4,17 +4,16 @@ import '../models/comment_model.dart';
 import '../models/news_model.dart';
 import 'package:get/get.dart';
 
-
-class DetailPage extends StatefulWidget {
+class DetailedNewsPage extends StatefulWidget {
   final ItemModel item;
 
-  const DetailPage({super.key, required this.item});
+  const DetailedNewsPage({super.key, required this.item});
 
   @override
-  State<DetailPage> createState() => _DetailPageState();
+  State<DetailedNewsPage> createState() => _DetailedNewsPageState();
 }
 
-class _DetailPageState extends State<DetailPage> {
+class _DetailedNewsPageState extends State<DetailedNewsPage> {
   final ItemController itemController = Get.find();
 
   @override
@@ -35,7 +34,8 @@ class _DetailPageState extends State<DetailPage> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             // Showing story attributes here
-            Text('Title: ${widget.item.title}', style: const TextStyle(fontSize: 20)),
+            Text('Title: ${widget.item.title}',
+                style: const TextStyle(fontSize: 20)),
             const SizedBox(height: 10),
             Text('Author: ${widget.item.author}',
                 style: const TextStyle(fontSize: 18)),
@@ -43,7 +43,8 @@ class _DetailPageState extends State<DetailPage> {
             Text('Upvotes: ${widget.item.score}',
                 style: const TextStyle(fontSize: 18)),
             const SizedBox(height: 10),
-            Text('Url: ${widget.item.url}', style: const TextStyle(fontSize: 18)),
+            Text('Url: ${widget.item.url}',
+                style: const TextStyle(fontSize: 18)),
             const SizedBox(height: 10),
             Text('Comments: ${widget.item.descendants}',
                 style: const TextStyle(fontSize: 18)),
@@ -65,7 +66,8 @@ class _DetailPageState extends State<DetailPage> {
                       return ListTile(
                         title: Text('By: ${comment.by}'),
                         subtitle: Text(comment.text),
-                        trailing: Text('${DateTime.fromMillisecondsSinceEpoch(comment.time * 1000)}'),
+                        trailing: Text(
+                            '${DateTime.fromMillisecondsSinceEpoch(comment.time * 1000)}'),
                       );
                     },
                   );

@@ -15,13 +15,23 @@ class NewsListTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.all(8.0),
+      padding: const EdgeInsets.only(top: 4.0),
       child: ListTile(
-        onTap: () => onTap() ,
-        title: Text(title, style: const TextStyle(fontWeight: FontWeight.bold),),
+        // Assigne the onTap function
+        onTap: () => onTap(),
+
+        // Assigne the Title text
+        title: Text(
+          title,
+          style: const TextStyle(fontWeight: FontWeight.bold),
+        ),
+
+        // Assigne the upVotes value
         subtitle: Text("$upVotes votes"),
+
+        // Assigne the total no. of Comments value
         trailing: Column(children: [
-          const Icon(Icons.comment),
+          const Icon(Icons.comment_outlined),
           Text("$noOfComments"),
         ]),
       ),

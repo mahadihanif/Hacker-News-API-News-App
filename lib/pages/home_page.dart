@@ -3,7 +3,7 @@ import 'package:get/get.dart';
 import 'package:remote_kitchen_news_app/widget/news_listTile.dart';
 import '../controller/storiesController.dart';
 import '../models/news_model.dart';
-import 'news_page.dart';
+import 'detailed_news_page.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -41,6 +41,8 @@ class _HomeScreenState extends State<HomeScreen> {
         title: const Text('Hacker News Top Stories'),
         titleTextStyle:
             const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+        elevation: 8.0,
+        centerTitle: true,
       ),
       body: Obx(() {
         if (itemController.isLoading.value && itemController.items.isEmpty) {
@@ -60,7 +62,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 noOfComments: item.descendants,
                 upVotes: item.score,
                 onTap: () {
-                  Get.to(() => DetailPage(item: item));
+                  Get.to(() => DetailedNewsPage(item: item));
                 },
               );
 
@@ -69,7 +71,7 @@ class _HomeScreenState extends State<HomeScreen> {
               //   subtitle: Text('Comments: ${item.descendants}'),  //No. of Comments refer to Descendants
               //   trailing: Text('Score: ${item.score}'),   //No. of UpVotes refer to Score
               //   onTap: () {
-              //     Get.to(() => DetailPage(item: item));
+              //     Get.to(() => DetailedNewsPage(item: item));
               //   },
 
               // );
