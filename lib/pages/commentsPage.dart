@@ -10,7 +10,8 @@ class CommentWidget extends StatelessWidget {
   final ScrollController scrollController;
   final ItemController itemController = Get.find();
 
-  CommentWidget({super.key, required this.commentIds, required this.scrollController});
+  CommentWidget(
+      {super.key, required this.commentIds, required this.scrollController});
 
   @override
   Widget build(BuildContext context) {
@@ -25,6 +26,10 @@ class CommentWidget extends StatelessWidget {
           itemCount: itemController.comments.length,
           itemBuilder: (context, index) {
             CommentModel comment = itemController.comments[index];
+            String commentText = comment.text.replaceAll('&#x27;', "'",);
+            commentText.replaceAll('&#x2F;', "/");
+            commentText.replaceAll('<p>', '\n\n');
+            commentText.replaceAll('</p>', '');
             return Padding(
               padding: const EdgeInsets.only(bottom: 16.0),
               child: Card(
@@ -33,12 +38,15 @@ class CommentWidget extends StatelessWidget {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text('By: ${comment.by}', style: TextStyle(fontWeight: FontWeight.bold)),
+                      Text('By: ${comment.by}',
+                          style: const TextStyle(fontWeight: FontWeight.bold)),
                       SizedBox(height: 5),
                       // Html(data: comment.text),
-                      Text(comment.text),
+                      Text(commentText),
                       SizedBox(height: 5),
-                      Text('${DateTime.fromMillisecondsSinceEpoch(comment.time * 1000)}', style: TextStyle(color: Colors.grey)),
+                      Text(
+                          '${DateTime.fromMillisecondsSinceEpoch(comment.time * 1000)}',
+                          style: TextStyle(color: Colors.grey)),
                     ],
                   ),
                 ),
