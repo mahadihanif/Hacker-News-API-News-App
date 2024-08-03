@@ -1,16 +1,50 @@
+
 # remote_kitchen_news_app
 
-A new Flutter project.
+This is Flutter news app with the Hacker News API. The API Documentation of - [Lab:Hacker-News](https://github.com/HackerNews/API)
 
 ## Getting Started
+### Run the Project in you local machine:
 
-This project is a starting point for a Flutter application.
 
-A few resources to get you started if this is your first Flutter project:
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+## Installation
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+Clone this repo. into your local machine and open the project folder into Android Stdio or Vs code IDE as you like
+
+```bash
+  git clone https://github.com/mahadihanif/Hacker-News-API-News-App.git
+  cd remote_kitchen_news_app
+```
+Open Terminal and run the following command to get all the nessesery packages
+
+```bash
+flutter pub get
+```    
+
+Then Run the project 
+
+```bash
+flutter run lib/main.dart
+```
+
+
+
+## Demo
+
+A quick demo of the running app
+
+
+
+First Page showing list of news
+![news list](https://github.com/user-attachments/assets/a1d88397-6c99-4b8f-b039-f84179370736)
+
+News Details Page 
+![detail page](https://github.com/user-attachments/assets/564a6d22-9946-4e6f-adeb-c422638bd2be)
+
+Comments Page
+![comment model](https://github.com/user-attachments/assets/d07ef1ee-b744-4ce2-b9d6-7c1f856cb133)
+
+
+
+
