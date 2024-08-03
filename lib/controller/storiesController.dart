@@ -6,7 +6,7 @@ import '../models/news_model.dart';
 import '../resources/urlHelper.dart';
 
 class ItemController extends GetxController {
-  var items = <ItemModel>[].obs;
+  var items = <TopStoryModel>[].obs;
   var isLoading = true.obs;
   var isLoadingMore = false.obs;
   var comments = <CommentModel>[].obs;
@@ -41,7 +41,7 @@ class ItemController extends GetxController {
           final storyUrl = Uri.parse(UrlHelper.urlForStory(id));
           final itemResponse = await http.get(storyUrl); // Getting Story by ID
           if (itemResponse.statusCode == 200) {
-            items.add(ItemModel.fromJson(json.decode(itemResponse.body)));
+            items.add(TopStoryModel.fromJson(json.decode(itemResponse.body)));
           }
         }
         currentPage++;

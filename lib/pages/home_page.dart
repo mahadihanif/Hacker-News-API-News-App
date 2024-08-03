@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:remote_kitchen_news_app/widget/news_listTile.dart';
 import '../controller/storiesController.dart';
 import '../models/news_model.dart';
+import '../widget/my_appBar.dart';
 import 'detailed_news_page.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -37,13 +38,7 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Hacker News Top Stories'),
-        titleTextStyle:
-            const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
-        elevation: 8.0,
-        centerTitle: true,
-      ),
+      appBar: const CustomAppBar(title:'Hacker News Top Stories'),
       body: Obx(() {
         if (itemController.isLoading.value && itemController.items.isEmpty) {
           return const Center(child: CircularProgressIndicator());
@@ -56,7 +51,9 @@ class _HomeScreenState extends State<HomeScreen> {
               if (index == itemController.items.length) {
                 return const Center(child: CircularProgressIndicator());
               }
-              ItemModel item = itemController.items[index];
+              TopStoryModel item = itemController.items[index];
+
+
               return NewsListTile(
                 title: item.title,
                 noOfComments: item.descendants,
@@ -66,15 +63,6 @@ class _HomeScreenState extends State<HomeScreen> {
                 },
               );
 
-              // ListTile(
-              //   title: Text(item.title),
-              //   subtitle: Text('Comments: ${item.descendants}'),  //No. of Comments refer to Descendants
-              //   trailing: Text('Score: ${item.score}'),   //No. of UpVotes refer to Score
-              //   onTap: () {
-              //     Get.to(() => DetailedNewsPage(item: item));
-              //   },
-
-              // );
             },
           );
         }

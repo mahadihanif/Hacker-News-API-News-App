@@ -1,7 +1,7 @@
 // comment_widget.dart
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-
+import 'package:intl/intl.dart';
 import '../controller/storiesController.dart';
 import '../models/comment_model.dart';
 
@@ -40,13 +40,13 @@ class CommentWidget extends StatelessWidget {
                     children: [
                       Text('By: ${comment.by}',
                           style: const TextStyle(fontWeight: FontWeight.bold)),
-                      SizedBox(height: 5),
+                      const SizedBox(height: 5),
                       // Html(data: comment.text),
                       Text(commentText),
-                      SizedBox(height: 5),
+                      const SizedBox(height: 5),
                       Text(
-                          '${DateTime.fromMillisecondsSinceEpoch(comment.time * 1000)}',
-                          style: TextStyle(color: Colors.grey)),
+                          DateFormat('yyyy-MM-dd hh:mm a').format(DateTime.fromMillisecondsSinceEpoch(comment.time * 1000)),
+                          style: const TextStyle(color: Colors.grey)),
                     ],
                   ),
                 ),

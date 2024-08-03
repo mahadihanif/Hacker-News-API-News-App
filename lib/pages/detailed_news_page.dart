@@ -1,5 +1,4 @@
 import 'dart:io';
-
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:intl/intl.dart';
@@ -10,10 +9,11 @@ import 'package:get/get.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 import '../widget/custom_row.dart';
+import '../widget/my_appBar.dart';
 import 'commentsPage.dart';
 
 class DetailedNewsPage extends StatefulWidget {
-  final ItemModel item;
+  final TopStoryModel item;
 
   const DetailedNewsPage({super.key, required this.item});
 
@@ -54,9 +54,7 @@ class _DetailedNewsPageState extends State<DetailedNewsPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text(widget.item.title),
-      ),
+      appBar: CustomAppBar(title: widget.item.title,),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Column(
@@ -94,16 +92,17 @@ class _DetailedNewsPageState extends State<DetailedNewsPage> {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 TextButton.icon(
-                onPressed: showComments,
-                icon: const Icon(Icons.comment),
-                label: Text('${widget.item.descendants} comments', style: const TextStyle(fontSize: 18),),
-                style: TextButton.styleFrom(
-                  backgroundColor: Colors.transparent,
-                  foregroundColor: Colors.black, // Foreground color
+                  onPressed: showComments,
+                  icon: const Icon(Icons.comment),
+                  label: Text(
+                    '${widget.item.descendants} comments',
+                    style: const TextStyle(fontSize: 18),
+                  ),
+                  style: TextButton.styleFrom(
+                    backgroundColor: Colors.transparent,
+                    foregroundColor: Colors.black, // Foreground color
+                  ),
                 ),
-              ),
-
-
                 DataRowWidget(
                     icon: Icons.thumbs_up_down_sharp,
                     label: 'Upvote',

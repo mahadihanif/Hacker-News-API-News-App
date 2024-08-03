@@ -1,4 +1,4 @@
-class ItemModel {
+class TopStoryModel {
   final String title;
   final String? author;
   final String? text;
@@ -7,9 +7,8 @@ class ItemModel {
   final int? score;
   final int? descendants;
   final int time;
- 
 
-  ItemModel({
+  TopStoryModel({
     required this.title,
     required this.score,
     required this.descendants,
@@ -18,11 +17,10 @@ class ItemModel {
     this.url,
     required this.time,
     required this.kids,
-    
   });
 
-  factory ItemModel.fromJson(Map<String, dynamic> json) {
-    return ItemModel(
+  factory TopStoryModel.fromJson(Map<String, dynamic> json) {
+    return TopStoryModel(
       title: json['title'],
       author: json['by'],
       text: json['text'],
@@ -31,8 +29,6 @@ class ItemModel {
       descendants: json['descendants'],
       time: json['time'],
       kids: List<int>.from(json['kids'] ?? []),
-      
     );
   }
 }
-
