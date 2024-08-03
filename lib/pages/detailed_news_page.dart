@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:remote_kitchen_news_app/controller/storiesController.dart';
 import '../models/comment_model.dart';
 import '../models/news_model.dart';
@@ -28,30 +29,50 @@ class _DetailedNewsPageState extends State<DetailedNewsPage> {
       appBar: AppBar(
         title: Text(widget.item.title),
       ),
+
+      
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             // Showing story attributes here
-            Text('Title: ${widget.item.title}',
-                style: const TextStyle(fontSize: 20)),
+            Text(widget.item.title,
+                style: const TextStyle(
+                  fontSize: 20,
+                  fontWeight: FontWeight.w600,
+                )),
             const SizedBox(height: 10),
-            Text('Author: ${widget.item.author}',
-                style: const TextStyle(fontSize: 18)),
+
+            Row(
+              children: [
+                const Icon(Icons.person),
+                Text(': ${widget.item.author}',
+                    style: const TextStyle(fontSize: 18)),
+              ],
+            ),
             const SizedBox(height: 10),
-            Text('Upvotes: ${widget.item.score}',
-                style: const TextStyle(fontSize: 18)),
+            Row(
+              children: [
+                const Icon(Icons.thumbs_up_down_sharp),
+                Text(': ${widget.item.score}',
+                    style: const TextStyle(fontSize: 18)),
+              ],
+            ),
             const SizedBox(height: 10),
             Text('Url: ${widget.item.url}',
+                style: const TextStyle(fontSize: 18)),
+            const SizedBox(height: 10),
+            Text('text: ${widget.item.text}',
                 style: const TextStyle(fontSize: 18)),
             const SizedBox(height: 10),
             Text('Comments: ${widget.item.descendants}',
                 style: const TextStyle(fontSize: 18)),
             const SizedBox(height: 10),
             Text(
-                'Time: ${DateTime.fromMillisecondsSinceEpoch(widget.item.time * 1000)}',
-                style: const TextStyle(fontSize: 18)),
+              'Time: ${DateFormat('yyyy-MM-dd hh:mm a').format(DateTime.fromMillisecondsSinceEpoch(widget.item.time * 1000).toUtc())}',
+              style: const TextStyle(fontSize: 18),
+            ),
             const SizedBox(height: 10),
             const Text('Comments:', style: TextStyle(fontSize: 20)),
             Expanded(

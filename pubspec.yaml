@@ -49,6 +49,7 @@ dev_dependencies:
   http: ^1.2.2
   provider: ^6.1.2
   get: ^4.6.6
+  intl: ^0.17.0   #Package for formatting date
 
 
 
