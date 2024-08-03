@@ -36,15 +36,3 @@ class ItemModel {
   }
 }
 
-class Comment {
-  final int id;
-  final String text;
-  final String? by;
-  final int? time;
-
-  const Comment(this.id, this.text, this.by, this.time);
-
-  factory Comment.fromJson(Map<String, dynamic> json) {
-    return Comment(json["id"], json["text"], json["by"], json["time"]);
-  }
-}

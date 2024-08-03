@@ -14,8 +14,6 @@ class ItemController extends GetxController {
   var currentPage = 0;
   final int pageSize = 10; // Number of news to load per page
   final _topStoryUrl = Uri.parse(UrlHelper.urlForTopStories());
-  
-  
 
   @override
   void onInit() {
@@ -32,7 +30,7 @@ class ItemController extends GetxController {
 
     try {
       final response =
-          await http.get(_topStoryUrl);  // Getting top Stories ID list
+          await http.get(_topStoryUrl); // Getting top Stories ID list
       if (response.statusCode == 200) {
         List<dynamic> ids = json.decode(response.body);
         int start = currentPage * pageSize;
@@ -41,12 +39,14 @@ class ItemController extends GetxController {
 
         for (var id in pageIds) {
           final storyUrl = Uri.parse(UrlHelper.urlForStory(id));
-          final itemResponse = await http.get(storyUrl);    // Getting Story by ID
+          final itemResponse = await http.get(storyUrl); // Getting Story by ID
           if (itemResponse.statusCode == 200) {
             items.add(ItemModel.fromJson(json.decode(itemResponse.body)));
           }
         }
         currentPage++;
+      } else {
+        throw Exception('Failed to load top stories');
       }
     } finally {
       if (loadMore) {
@@ -64,12 +64,13 @@ class ItemController extends GetxController {
     comments.clear();
     try {
       for (var id in commentIds) {
-      final CommentsUrl = Uri.parse(UrlHelper.urlForCommentById(id));
-        final commentResponse = await http.get(
-           CommentsUrl);
+        final CommentsUrl = Uri.parse(UrlHelper.urlForCommentById(id));
+        final commentResponse = await http.get(CommentsUrl);
         if (commentResponse.statusCode == 200) {
           comments
               .add(CommentModel.fromJson(json.decode(commentResponse.body)));
+        } else {
+          throw Exception('Failed to load comments');
         }
       }
     } finally {
